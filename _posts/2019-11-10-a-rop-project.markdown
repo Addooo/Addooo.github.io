@@ -7,7 +7,7 @@ tags: [ROP]
 
 In the last semester i attended the computer security course, and since i had to do a project i made a simple program to exploit with a rop chain in order to explain how return oriented programming works.
 Here i will explain everything about.
-During my presentation i started talk about the fact that during the excution of a program memory is under the constraint Write XOR Execute. Part of the memory that i can write i cannot execute and viceversa.
+During my presentation i started talk about the fact that during the excution of a program the memory is under the constraint Write XOR Execute. Part of the memory that i can write i cannot execute and viceversa.
 And so is here where Return Oriented programming come in action, with this technique when a program is vulnerable for example to a buffer overflow i can still execute malicious code even if i can't upload the shellcode directly in the stack.
 Supposing to work on a x86 architecture, i have on the stack the base pointer and after that the return address of the function (see the image below).
 
@@ -45,25 +45,26 @@ So the goal is to overwrite the return address, and consequentially what came af
 
 And so on with this trick is possible execute a shell.
 To do all of this i used Radare2(that allow me to search gadget inside the code) and pwntools(that simplify me the construction of the exploit).
-All of this was did whit ASLR disabled and no stack canaries, that are two of contromeasures use to avoid this kind of attack.
-To do all of this i had to search the right gadgets to make the instructions to execute /bin/sh with correct parameters:
+All of this was did whit ASLR disabled and no stack canaries, that are two of contromeasures used to avoid this kind of attack.
+To do all of this i had to search the right gadgets to execute the instructions and spawn /bin/sh.
+The parameters to exec /bin/sh are:
 - eax = 0xb
 - ebx = address of memory of string "/bin/sh"
 - ecx = pointer to pointer of string "/bin/sh"
 - edx = env variable but that can be set to 0 with no problem
 
 To simplify things i used the string "/bin//sh" because on linux is ignored the double slash.
-So i search the gadgets.
-I found pop eax, pob ebx, and pop edx with no problems, the only one problem was for pop ecx see below: (but i decide to maintaned it in order to find a way to patch it).
+So i searched the gadgets.
+I found pop eax, pob ebx, and pop edx with no problems, the only one problem was for pop ecx see below: (but i decided to maintan it in order to find a way to patch it).
 
 ![My helpful screenshot](/assets/pop_ecx.png)
 
 After that i search the address of the bss in order to have a place to write /bin//sh.
-And after that i search the write-what-where gadget that allow me to write ad a specific address a value with the use of two register. In this way using the pop instructions i could set value to register and with this gadget write the memory (the bss).
+And after that i search the write-what-where gadget that allow me to write at a specific address a value with the use of two register. In this way using the pop instructions i could set value to register and with this gadget write the memory (the bss).
 
 ![My helpful screenshot](/assets/write_mem.png)
 
-To patch the pop ecx i used a pop esi since in the gadget above there was or cl,byte[esi] in order to make the ecx value to not change. NOTE: that this work only because the specific value in the memory, proprably with ASLR i had to change the idea to make this work.
+To patch the pop ecx i used a pop esi since in the gadget above there was or cl,byte[esi] in order to make the ecx value to not change. NOTE: that this work only because the specific value in the memory, proprably with ASLR enabled i should have to change to make this work.
 After that i search for xor edx, edx. And in the end i found xor eax, eax and one last instruction that increase the al register, so i called it the number of times to reach the number of the syscall (0xb).
 And in the end the int 0x80 to make the syscall.
 To clarify i had to add an initial padding to fill the buffer.
@@ -142,7 +143,7 @@ buf += p32(int_80)
 print(buf)
 
 {% endhighlight %}
-Maybe all of this is over simplified and not to much clear, i decided to not explain somethings but i thing that in general the basic idea is ok. However this was my first article so i have a very loooooong road to improve my writing and infosec skills.
+Maybe all of this is over simplified and not to much clear, i decided to not explain somethings in detail but i thing that in general the basic idea is ok. However this was my first article so i have a very loooooong road to improve my infosec skills (and a my english writing).
 
 
 
