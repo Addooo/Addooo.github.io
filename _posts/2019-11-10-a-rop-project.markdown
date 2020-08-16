@@ -143,7 +143,7 @@ buf += p32(int_80)
 print(buf)
 
 {% endhighlight %}
-Maybe all of this is over simplified and not to much clear, i decided to not explain somethings in detail but i thing that in general the basic idea is ok. However this was my first article so i have a very loooooong road to improve my infosec skills (and a my english writing).
+Maybe all of this is over simplified and not to much clear, i decided to not explain somethings in detail but i thing that in general the basic idea is ok. However this was my first article so i have a very loooooong road to improve my infosec (and also writing) skills.
 
 
 
