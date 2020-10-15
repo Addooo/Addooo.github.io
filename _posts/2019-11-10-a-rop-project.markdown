@@ -70,6 +70,8 @@ And in the end the int 0x80 to make the syscall.
 To clarify i had to add an initial padding to fill the buffer.
 In the end once i execute my program i had this:
 
+
+EDIT: i used sudo but there isn't a motivation, exploit works also with process with uid different from zero
 ![My helpful screenshot](/assets/PoC.png)
 
 the ";" is to mantaint the interaction, anyway there is a method in pwntools that i didn't know at the time.
