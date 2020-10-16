@@ -15,7 +15,7 @@ Supposing to work on a x86 architecture, i have on the stack the base pointer an
 
 Here's the code that i wanted to exploit:
 {% highlight c %}
-include <stdlib.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-10-16T08:51:47+02:00</updated><id>http://localhost:4000/feed.xml</id><subtitle>Trying to do things.</subtitle><entry><title type="html">Midnightsun ctf writeup pwn 1</title><link href="http://localhost:4000/ctf/2020/04/15/midnightsun-ctf-writeup.html" rel="alternate" type="text/html" title="Midnightsun ctf writeup pwn 1" /><published>2020-04-15T00:00:00+02:00</published><updated>2020-04-15T00:00:00+02:00</updated><id>http://localhost:4000/ctf/2020/04/15/midnightsun-ctf-writeup</id><content type="html" xml:base="http://localhost:4000/ctf/2020/04/15/midnightsun-ctf-writeup.html">&lt;p&gt;This is the writeup of one of the challenge of the midnightsun ctf.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-10-16T09:56:36+02:00</updated><id>http://localhost:4000/feed.xml</id><subtitle>Trying to do things.</subtitle><entry><title type="html">Midnightsun ctf writeup pwn 1</title><link href="http://localhost:4000/ctf/2020/04/15/midnightsun-ctf-writeup.html" rel="alternate" type="text/html" title="Midnightsun ctf writeup pwn 1" /><published>2020-04-15T00:00:00+02:00</published><updated>2020-04-15T00:00:00+02:00</updated><id>http://localhost:4000/ctf/2020/04/15/midnightsun-ctf-writeup</id><content type="html" xml:base="http://localhost:4000/ctf/2020/04/15/midnightsun-ctf-writeup.html">&lt;p&gt;This is the writeup of one of the challenge of the midnightsun ctf.
 In this challenge were given a binary and a libc. Once i had executed the binary on the video appeared the written “buffer: “.
 &lt;img src=&quot;/assets/start.png&quot; alt=&quot;My helpful screenshot&quot; /&gt;
 And after that i could insert my buffer and try to exploit the program.
@@ -72,8 +72,8 @@ Supposing to work on a x86 architecture, i have on the stack the base pointer an
 
 &lt;p&gt;Here’s the code that i wanted to exploit:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;n&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stdlib&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;unistd.h&amp;gt;
 &lt;/span&gt;
 &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
